@@ -2,7 +2,7 @@
 #criar funções para pagamento
 #criar funções para ler o menu
 #criar funções apenas para aquilo que se repete mais de uma vez dentro do codigo e depois adaptar.
-#!!!!perguntar a guilherme se é assim que faz!!!!!
+
 
 
 produtos = [['ração',150 , 70] ,['shampoo' , 30 , 70] , ['condicionador' , 30 , 70],['brinquedo' , 20 , 70] , ['coleira' , 20 ,70],['casinha',80, 70] , ['caminha' ,100, 70] , ['caixa de transporte' , 210 ,70] , ['escova' , 25 , 70] , ['kit de perfume' , 150 , 70]]
