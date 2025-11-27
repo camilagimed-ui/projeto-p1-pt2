@@ -72,3 +72,11 @@ def menucompra():
     print('3 - avaliação do produto ou atendimento')
     print('4 - Lista de desejos')
     print('0 - sair')
+    
+def lerprodutos (produtos):
+     for i in range(len(produtos)):
+        print(f'produto | {produtos[i][0]} | valor | ${produtos[i][1]} ')
+
+def leratendimentos (atendimentosP):
+    for h in range(len(atendimentoP)):
+        print(f'atendimento: {atendimentoP[h][0]} |  Valor: R${atendimentoP[h][1]} ')

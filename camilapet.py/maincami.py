@@ -95,8 +95,8 @@ while True:
                         opcao = int(input('digite que opcao deseja realizar: '))
                     elif opcao == 1:
                         print('Realize sua compra agora mesmo!')
-                        for i in range(len(produtos)):
-                            print(f'produtos | {produtos[i][0]} | valor | ${produtos[i][1]} ')
+
+                        funçõescami.lerprodutos(produtos)
 
                         while True:
                             qtd = int(input('Digite a quantidade de produtos que deseja comprar: '))
@@ -155,8 +155,7 @@ while True:
                         print('escolha seu atendimento:')
                         valort = 0
 
-                        for h in range(len(atendimentoP)):
-                            print(f'atendimento: {atendimentoP[h][0]} |  Valor: R${atendimentoP[h][1]} ')
+                        funçõescami.leratendimentos(atendimentoP)
 
                         print('Qual atendimento deseja realizar?')
                         atendimento = input('digite o atendimento que deseja realizar: ').lower()
