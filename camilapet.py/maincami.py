@@ -29,40 +29,8 @@ while True:
         print('digite uma opcao valida!!')
 
     elif opcao == 1:
-        print('efetue seu cadastro!')
-        nome = input('nome: ')
-        senha = input('senha: ')
-        senha2 = input('confirme sua senha: ')
-        tipo = input('digite se voce é administrador ou cliente: ').lower()
-        idade = int(input('idade: '))
-        nomePet = input('digite o nome do seu pet: ')
-
-        while True:
-            if tipo != 'administrador' and tipo != 'cliente':
-                print('tipo invalido,digite o tipo novamente!!')
-                tipo = input('digite se voce é administrador ou cliente: ').lower()
-
-            elif senha != senha2:
-                print('tem certeza que digitou as duas senhas iguais? Tente novamente')
-                senha = input('senha: ')
-                senha2 = input('confirme sua senha: ')
-
-            elif idade < 0 or idade > 110:
-                print('idade invalida!!Digite novamente!!')
-                idade = int(input('idade: '))
-
-            else:
-                possuiNome = 0
-                for n in usuario:
-                    if nome == n[0]:
-                        print('Esse nome ja exite!!!Tente outro nome!!!')
-                        possuiNome = 1
-                        nome = input('nome: ')
-
-                if possuiNome == 0:
-                    usuario.append([nome, senha, tipo, idade, nomePet])
-                    print(f'Parabens {nome}, voce foi cadastrado com sucesso!!')
-                    break
+        
+        funçõescami.cadastrarUsuario(usuario)
 
     if opcao == 2:
         print('faça o seu login!!')
@@ -93,6 +61,7 @@ while True:
                     elif opcao != 0 and opcao != 1 and opcao != 2 and opcao != 3 and opcao != 4:
                         print('opcao invalida digite novamente')
                         opcao = int(input('digite que opcao deseja realizar: '))
+                        
                     elif opcao == 1:
                         print('Realize sua compra agora mesmo!')
 

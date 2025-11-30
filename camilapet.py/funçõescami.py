@@ -33,7 +33,7 @@ def desejo (produtos):
     item = input('digite o nome do item que deseja adicionar a sua lista de desejos: ').lower()
     
     for b in range(len(produtos)):
-        if item in produtos[b][0].lower():
+        if item == produtos[b][0].lower():
             print(f'o produto {item} foi encontrado!')
             listaD.append(item)
             print(f'essa é sua lista de desejo atualmente {listaD}')
@@ -74,11 +74,55 @@ def menucompra():
     print('0 - sair')
 
     
-def lerprodutos (produtos):
-     for i in range(len(produtos)):
-        print(f'produto | {produtos[i][0]} | valor | ${produtos[i][1]} ')
+def validarTipo (tipo):
+    if tipo == 'administrador' or tipo == 'cliente':
+        return True
+    return False
 
-def leratendimentos (atendimentosP):
-    for h in range(len(atendimentoP)):
-        print(f'atendimento: {atendimentoP[h][0]} |  Valor: R${atendimentoP[h][1]} ')
+def validarSenha (senha , senha2):
+    if senha == senha2:
+        return True
+    return False
 
+def validarIdade (idade):
+    if idade > 0 or idade <= 110:
+        return True
+    return False
+
+def nomeExiste (usuario , nome):
+    for n in usuario:
+        if n[0] == nome:
+            return True
+    return False
+
+def cadastrarUsuario (usuario):
+    print('efetue seu cadastro!')
+    nome = input('nome: ')
+    senha = input('senha: ')
+    senha2 = input('confirme sua senha: ')
+    tipo = input('digite se voce é administrador ou cliente: ').lower()
+    idade = int(input('idade: '))
+    nomePet = input('digite o nome do seu pet: ')
+
+    while True:
+
+        if validarTipo (tipo) == False:
+            print('tipo invalido!')
+            tipo = input('digite se voce é administrador ou cliente: ').lower()
+
+        elif validarSenha (senha , senha2)== False:
+            print('as senhas não são iguais!!')
+            senha = input('senha: ')
+            senha2 = input('confirme sua senha: ')
+
+        elif validarIdade(idade) == False:
+            print('idade invalida!')
+            idade = int(input('idade: '))
+        
+        elif nomeExiste (usuario , nome) == True:
+            print('esse nome ja existe!!')
+            nome = input('nome: ')
+        else:
+            usuario.append([nome, senha, tipo, idade, nomePet])
+            print(f'Parabéns {nome}, cadastro realizado com sucesso!')
+            return True
