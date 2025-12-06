@@ -11,7 +11,7 @@ produtos = [
     {'nome': 'kit de perfume', 'preco': 150, 'estoque': 70}
 ]
 
-atendimentosP = [
+atendimentoP = [
     {'atendimento' : 'banho' , 'preco' : 70 , 'disponibilidade' : 3} ,
     {'atendimento' : 'tosa' , 'preco' : 40 , 'disponibilidade' : 3} ,
     {'atendimento' : 'banho e tosa' , 'preco' : 100 , 'disponibilidade' : 3} ,
@@ -31,41 +31,15 @@ def listaProdutos(produtos):
 
 
 def listaratendimento(atendimentoP):
-    for a in atendimentosP:
+    for a in atendimentoP:
         print(f"atendimento: {a['atendimento']} | preço: ${a['preco']} | disponibilidade: {a['disponibilidade']}")
 
 
-def av(avaliacao):
-    print('deixe sua avaliação e no que seria possivel a gente melhorar!')
-    av = input('deixe sua a avaliação aqui: ')
-    avaliacao.append({
-        'avaliacao' : av
-    })
-    print(avaliacao)
-    print('avaliação enviada com sucesso!')
-
-
-def desejo(produtos , listaD):
-    print('bem vindo a sua lista de desejos do pet e cia!')
-    item = input('digite o nome do item que deseja adicionar a sua lista de desejos: ').lower()
-    
-    for b in range(len(produtos)):
-        if item == produtos[b]['nome'].lower():
-            print(f'o produto {item} foi encontrado!')
-            listaD.append({'desejo': item})
-
-            for a in range(len(listaD)):
-                print(f"essa é sua lista de desejo atualmente {listaD[a]['desejo']}")
-
-            break
-
-    else:
-        print(f'o produto {item} não existe em nossa loja!')
 
 
 def horario(atendimentoP , valort , atendimento):
     print('horario marcado com sucesso!')
-
+    
     for a in range(len(atendimentoP)):
         if atendimento == atendimentoP[a]['atendimento']:
             valort += atendimentoP[a]['preco']
@@ -80,8 +54,10 @@ def horario(atendimentoP , valort , atendimento):
             if pagamento >= valort:
                 troco = pagamento - valort
                 print(f'Compra concluída com sucesso! Seu troco é: R${troco}')
+                
 
-            break
+            
+        
 
 
 
@@ -171,6 +147,53 @@ def cadastrarUsuario(usuario):
         return True
 
 
+def av(avaliacao):
+    print('deixe sua avaliação e no que seria possivel a gente melhorar!')
+    av = input('deixe sua a avaliação aqui: ')
+
+    avaliacao.append({
+        'avaliacao' : av
+    })
+    
+    print(f'Avaliação: {av}')
+    print('avaliação enviada com sucesso!')
+
+    with open('avaliacao.txt', 'a') as arq:
+        arq.write(f"avaliação: {av}\n")
+        arq.write('-------------------------------------------------------\n')
+
+def desejo(produtos , listaD):
+    print('bem vindo a sua lista de desejos do pet e cia!')
+    item = input('digite o nome do item que deseja adicionar a sua lista de desejos: ').lower()
+    
+    for b in range(len(produtos)):
+        if item == produtos[b]['nome'].lower():
+            print(f'o produto {item} foi encontrado!')
+            listaD.append({'desejo': item})
+            with open('lista_de_desejo.txt', 'a') as arq:
+                arq.write(f"lista de desejo: {item}\n")
+
+                arq.write('-------------------------------------------------------\n')
+
+            for a in range(len(listaD)):
+                print(f"essa é sua lista de desejo atualmente: {listaD[a]['desejo']}")
 
 
-listaratendimento(atendimentosP)
+            break
+
+    else:
+        print(f'o produto {item} não existe em nossa loja!')
+
+
+def acharAtendimento(atendimentoP , atendimento):
+    
+    for h in range(len(atendimentoP)):
+        if atendimento.lower() == atendimentoP[h]['atendimento'].lower():
+            print('Atendimento encontrado com sucesso!')
+            print('agora realize o agendamento do horario que você deseja!!')
+            return True
+            break
+            
+    else:
+        print('atendimento não encontrado! ')
+     
