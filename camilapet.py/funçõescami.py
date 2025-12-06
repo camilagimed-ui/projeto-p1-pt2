@@ -1,54 +1,78 @@
-#criar funções para ler listas
-#criar funções para pagamento
-#criar funções para ler o menu
-#criar funções apenas para aquilo que se repete mais de uma vez dentro do codigo e depois adaptar.
+produtos = [
+    {'nome': 'ração', 'preco': 150, 'estoque': 70},
+    {'nome': 'shampoo', 'preco': 30, 'estoque': 70},
+    {'nome': 'condicionador', 'preco': 30, 'estoque': 70},
+    {'nome': 'brinquedo', 'preco': 20, 'estoque': 70},
+    {'nome': 'coleira', 'preco': 20, 'estoque': 70},
+    {'nome': 'casinha', 'preco': 80, 'estoque': 70},
+    {'nome': 'caminha', 'preco': 100, 'estoque': 70},
+    {'nome': 'caixa de transporte', 'preco': 210, 'estoque': 70},
+    {'nome': 'escova', 'preco': 25, 'estoque': 70},
+    {'nome': 'kit de perfume', 'preco': 150, 'estoque': 70}
+]
 
+atendimentosP = [
+    {'atendimento' : 'banho' , 'preco' : 70 , 'disponibilidade' : 3} ,
+    {'atendimento' : 'tosa' , 'preco' : 40 , 'disponibilidade' : 3} ,
+    {'atendimento' : 'banho e tosa' , 'preco' : 100 , 'disponibilidade' : 3} ,
+    {'atendimento' : 'consulta' , 'preco' : 120 , 'disponibilidade' : 3}
+] 
 
-
-produtos = [['ração',150 , 70] ,['shampoo' , 30 , 70] , ['condicionador' , 30 , 70],['brinquedo' , 20 , 70] , ['coleira' , 20 ,70],['casinha',80, 70] , ['caminha' ,100, 70] , ['caixa de transporte' , 210 ,70] , ['escova' , 25 , 70] , ['kit de perfume' , 150 , 70]]
 HorariosD = ['10h', '12h',  '16h', '18h']
-atendimentoP = [['banho', 70, 3], ['tosa', 40, 3], ['banho e tosa', 100, 3], ['consulta', 120, 3]]
 avaliacao = []
 valort = 0
 usuario = [] 
 listaD = []
 
-def listaProdutos (produtos):
+
+def listaProdutos(produtos):
     for i in range(len(produtos)):
-        print(f'produtos | {produtos[i][0]} | valor | ${produtos[i][1]} ')
+        print(f"produtos | {produtos[i]['nome']} | valor | ${produtos[i]['preco']}")
 
-def horarios (HorariosD):
-    for h in range(len(atendimentoP)):
-        print(f'atendimento: {atendimentoP[h][0]} |  Valor: R${atendimentoP[h][1]} ')
 
-def av (avaliacao):
+def listaratendimento(atendimentoP):
+    for a in atendimentosP:
+        print(f"atendimento: {a['atendimento']} | preço: ${a['preco']} | disponibilidade: {a['disponibilidade']}")
+
+
+def av(avaliacao):
     print('deixe sua avaliação e no que seria possivel a gente melhorar!')
-    Av = input('deixe sua a avaliação aqui: ')
-    avaliacao.append(Av)
+    av = input('deixe sua a avaliação aqui: ')
+    avaliacao.append({
+        'avaliacao' : av
+    })
     print(avaliacao)
     print('avaliação enviada com sucesso!')
 
-def desejo (produtos):
+
+def desejo(produtos , listaD):
     print('bem vindo a sua lista de desejos do pet e cia!')
     item = input('digite o nome do item que deseja adicionar a sua lista de desejos: ').lower()
     
     for b in range(len(produtos)):
-        if item == produtos[b][0].lower():
+        if item == produtos[b]['nome'].lower():
             print(f'o produto {item} foi encontrado!')
-            listaD.append(item)
-            print(f'essa é sua lista de desejo atualmente {listaD}')
+            listaD.append({'desejo': item})
+
+            for a in range(len(listaD)):
+                print(f"essa é sua lista de desejo atualmente {listaD[a]['desejo']}")
+
             break
+
     else:
         print(f'o produto {item} não existe em nossa loja!')
 
 
-def horario (atentimentoP , valort , atendimento):
+def horario(atendimentoP , valort , atendimento):
     print('horario marcado com sucesso!')
+
     for a in range(len(atendimentoP)):
-        if atendimento == atendimentoP[a][0]:
-            valort += atendimentoP[a][1]
+        if atendimento == atendimentoP[a]['atendimento']:
+            valort += atendimentoP[a]['preco']
             print(f'o valor total do atendimento foi R${valort}')
+
             pagamento = float(input('Insira quanto de dinheiro você vai dar: '))
+
             while pagamento < 0 or pagamento < valort:
                 print('Valor inválido! Digite novamente!')
                 pagamento = float(input('Insira quanto de dinheiro você vai dar: '))
@@ -56,9 +80,12 @@ def horario (atentimentoP , valort , atendimento):
             if pagamento >= valort:
                 troco = pagamento - valort
                 print(f'Compra concluída com sucesso! Seu troco é: R${troco}')
-        break
 
-def menuinicial ():
+            break
+
+
+
+def menuinicial():
     print('Bem vindo ao Pet e Cia!!!')
     print('Escolha uma das opções abaixo: ')
     print('1 - Cadastro')
@@ -74,55 +101,76 @@ def menucompra():
     print('0 - sair')
 
     
-def validarTipo (tipo):
+def validarTipo(tipo):
     if tipo == 'administrador' or tipo == 'cliente':
         return True
     return False
 
-def validarSenha (senha , senha2):
+
+def validarSenha(senha , senha2):
     if senha == senha2:
         return True
     return False
 
-def validarIdade (idade):
-    if idade > 0 or idade <= 110:
+
+def validarIdade(idade):
+    if idade > 0 and idade <= 110:  
         return True
     return False
 
-def nomeExiste (usuario , nome):
+
+def nomeExiste(usuario , nome):
     for n in usuario:
-        if n[0] == nome:
+        if n['nome'] == nome:   
             return True
     return False
 
-def cadastrarUsuario (usuario):
-    print('efetue seu cadastro!')
-    nome = input('nome: ')
-    senha = input('senha: ')
-    senha2 = input('confirme sua senha: ')
-    tipo = input('digite se voce é administrador ou cliente: ').lower()
-    idade = int(input('idade: '))
-    nomePet = input('digite o nome do seu pet: ')
 
-    while True:
+def cadastrarUsuario(usuario):
+    print('Efetue seu cadastro!')
 
-        if validarTipo (tipo) == False:
-            print('tipo invalido!')
-            tipo = input('digite se voce é administrador ou cliente: ').lower()
+    nome = input('Nome: ')
+    senha = input('Senha: ')
+    senha2 = input('Confirme sua senha: ')
+    tipo = input('Digite se você é administrador ou cliente: ').lower()
+    idade = int(input('Idade: '))
+    nomePet = input('Nome do pet: ')
 
-        elif validarSenha (senha , senha2)== False:
-            print('as senhas não são iguais!!')
-            senha = input('senha: ')
-            senha2 = input('confirme sua senha: ')
+    if validarSenha(senha, senha2) == False:
+        print('As senhas não são iguais!')
+        return False
 
-        elif validarIdade(idade) == False:
-            print('idade invalida!')
-            idade = int(input('idade: '))
+    elif validarIdade(idade) == False:
+        print('Idade inválida!')
+        return False
+
+    elif nomeExiste(usuario, nome) == True:
+        print('Esse nome já existe!')
+        return False
+
+    else:
         
-        elif nomeExiste (usuario , nome) == True:
-            print('esse nome ja existe!!')
-            nome = input('nome: ')
-        else:
-            usuario.append([nome, senha, tipo, idade, nomePet])
-            print(f'Parabéns {nome}, cadastro realizado com sucesso!')
-            return True
+        usuario.append({
+            'nome': nome,
+            'senha': senha,
+            'tipo': tipo,
+            'idade': idade,
+            'nome do pet': nomePet
+        })
+
+        with open('usuarios.txt', 'a') as arq:
+
+            arq.write(f"Nome: {nome}\n")
+            arq.write(f"Senha: {senha}\n")
+            arq.write(f"Tipo: {tipo}\n")
+            arq.write(f"Idade: {idade}\n")
+            arq.write(f"Nome do Pet: {nomePet}\n")
+            arq.write('-------------------------------------------------------\n')
+
+        print(f'Parabéns {nome}, cadastro realizado com sucesso!')
+        return True
+
+
+
+
+listaratendimento(atendimentosP)
