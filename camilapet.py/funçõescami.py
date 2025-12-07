@@ -106,21 +106,24 @@ def cadastrarUsuario(usuario):
     print('Efetue seu cadastro!')
 
     nome = input('Nome: ')
+    
     senha = input('Senha: ')
     senha2 = input('Confirme sua senha: ')
-    tipo = input('Digite se você é administrador ou cliente: ').lower()
-    idade = int(input('Idade: '))
-    nomePet = input('Nome do pet: ')
 
-    if validarSenha(senha, senha2) == False:
+    while validarSenha(senha, senha2) == False:
         print('As senhas não são iguais!')
         return False
+    
+    tipo = input('Digite se você é administrador ou cliente: ').lower()
+    idade = int(input('Idade: '))
 
-    elif validarIdade(idade) == False:
+    while validarIdade(idade) == False:
         print('Idade inválida!')
         return False
+    
+    nomePet = input('Nome do pet: ')
 
-    elif nomeExiste(usuario, nome) == True:
+    while nomeExiste(usuario, nome) == True:
         print('Esse nome já existe!')
         return False
 
@@ -134,7 +137,7 @@ def cadastrarUsuario(usuario):
             'nome do pet': nomePet
         })
 
-        with open('usuarios.txt', 'a') as arq:
+    with open('usuarios.txt', 'a') as arq:
 
             arq.write(f"Nome: {nome}\n")
             arq.write(f"Senha: {senha}\n")
@@ -143,8 +146,8 @@ def cadastrarUsuario(usuario):
             arq.write(f"Nome do Pet: {nomePet}\n")
             arq.write('-------------------------------------------------------\n')
 
-        print(f'Parabéns {nome}, cadastro realizado com sucesso!')
-        return True
+    print(f'Parabéns {nome}, cadastro realizado com sucesso!')
+    return True
 
 
 def av(avaliacao):
