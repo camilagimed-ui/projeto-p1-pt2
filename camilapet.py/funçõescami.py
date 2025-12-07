@@ -17,13 +17,32 @@ atendimentoP = [
     {'atendimento' : 'banho e tosa' , 'preco' : 100 , 'disponibilidade' : 3} ,
     {'atendimento' : 'consulta' , 'preco' : 120 , 'disponibilidade' : 3}
 ] 
+HorariosD = [
+    {'horario' : '10h'},
+    {'horario' : '12h'},
+    {'horario' : '16h'},
+    {'horario' : '18h'},
+]
 
-HorariosD = ['10h', '12h',  '16h', '18h']
 avaliacao = []
 valort = 0
 usuario = [] 
 listaD = []
 
+def menuinicial():
+    print('Bem vindo ao Pet e Cia!!!')
+    print('Escolha uma das opções abaixo: ')
+    print('1 - Cadastro')
+    print('2 - login')
+    print('0 - Sair')
+
+
+def menucompra():
+    print('1 - realizar compra')
+    print('2 - atendimento ao pet')
+    print('3 - avaliação do produto ou atendimento')
+    print('4 - Lista de desejos')
+    print('0 - sair')
 
 def listaProdutos(produtos):
     for i in range(len(produtos)):
@@ -31,13 +50,25 @@ def listaProdutos(produtos):
 
 
 def listaratendimento(atendimentoP):
-    for a in atendimentoP:
-        print(f"atendimento: {a['atendimento']} | preço: ${a['preco']} | disponibilidade: {a['disponibilidade']}")
+    for a in range(len(atendimentoP)):
+        print(f'atendimento | {atendimentoP[a]['atendimento']} | Valor | R$ {atendimentoP[a]['preco']}')
 
 
+def acharAtendimento(atendimentoP , atendimento):
+    
+    for h in range(len(atendimentoP)):
+        if atendimento.lower() == atendimentoP[h]['atendimento'].lower():
+            print('Atendimento encontrado com sucesso!')
+            print('agora realize o agendamento do horario que você deseja!!')
+            return True
+            break
+            
+    else:
+        print('atendimento não encontrado! ')
+     
 
 
-def horario(atendimentoP , valort , atendimento):
+def paghorario(atendimentoP , valort , atendimento):
     print('horario marcado com sucesso!')
     
     for a in range(len(atendimentoP)):
@@ -56,25 +87,8 @@ def horario(atendimentoP , valort , atendimento):
                 print(f'Compra concluída com sucesso! Seu troco é: R${troco}')
                 
 
-            
-        
 
 
-
-def menuinicial():
-    print('Bem vindo ao Pet e Cia!!!')
-    print('Escolha uma das opções abaixo: ')
-    print('1 - Cadastro')
-    print('2 - login')
-    print('0 - Sair')
-
-
-def menucompra():
-    print('1 - realizar compra')
-    print('2 - atendimento ao pet')
-    print('3 - avaliação do produto ou atendimento')
-    print('4 - Lista de desejos')
-    print('0 - sair')
 
     
 def validarTipo(tipo):
@@ -106,30 +120,34 @@ def cadastrarUsuario(usuario):
     print('Efetue seu cadastro!')
 
     nome = input('Nome: ')
-    
-    senha = input('Senha: ')
-    senha2 = input('Confirme sua senha: ')
-
-    while validarSenha(senha, senha2) == False:
-        print('As senhas não são iguais!')
-        return False
-    
-    tipo = input('Digite se você é administrador ou cliente: ').lower()
-    idade = int(input('Idade: '))
-
-    while validarIdade(idade) == False:
-        print('Idade inválida!')
-        return False
-    
-    nomePet = input('Nome do pet: ')
-
     while nomeExiste(usuario, nome) == True:
         print('Esse nome já existe!')
-        return False
+        nome = input('Nome: ')
 
-    else:
+    senha = input('Senha: ')
+    senha2 = input('Confirme sua senha: ')
+    while validarSenha(senha, senha2) == False:
+        print('As senhas não são iguais!')
+        senha = input('Senha: ')
+        senha2 = input('Confirme sua senha: ')
         
-        usuario.append({
+    tipo = input('Digite se você é administrador ou cliente: ').lower()
+    while validarTipo(tipo) == False:
+        print('tipo invalido')
+        tipo = input('Digite se você é administrador ou cliente: ').lower()
+        
+    idade = int(input('Idade: '))
+    while validarIdade(idade) == False:
+        print('Idade inválida!')
+        idade = int(input('Idade: '))
+
+    nomePet = input('Nome do pet: ')
+
+   
+
+    
+        
+    usuario.append({
             'nome': nome,
             'senha': senha,
             'tipo': tipo,
@@ -150,6 +168,11 @@ def cadastrarUsuario(usuario):
     return True
 
 
+
+
+
+
+
 def av(avaliacao):
     print('deixe sua avaliação e no que seria possivel a gente melhorar!')
     av = input('deixe sua a avaliação aqui: ')
@@ -164,6 +187,10 @@ def av(avaliacao):
     with open('avaliacao.txt', 'a') as arq:
         arq.write(f"avaliação: {av}\n")
         arq.write('-------------------------------------------------------\n')
+
+
+
+
 
 def desejo(produtos , listaD):
     print('bem vindo a sua lista de desejos do pet e cia!')
@@ -187,16 +214,3 @@ def desejo(produtos , listaD):
     else:
         print(f'o produto {item} não existe em nossa loja!')
 
-
-def acharAtendimento(atendimentoP , atendimento):
-    
-    for h in range(len(atendimentoP)):
-        if atendimento.lower() == atendimentoP[h]['atendimento'].lower():
-            print('Atendimento encontrado com sucesso!')
-            print('agora realize o agendamento do horario que você deseja!!')
-            return True
-            break
-            
-    else:
-        print('atendimento não encontrado! ')
-     

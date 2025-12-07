@@ -21,6 +21,13 @@ atendimentoP = [
     {'atendimento' : 'consulta' , 'preco' : 120 , 'disponibilidade' : 3}
 ] 
 
+HorariosD = [
+    {'horario' : '10h'},
+    {'horario' : '12h'},
+    {'horario' : '16h'},
+    {'horario' : '18h'},
+]
+
 animaisAdocoes = []
 listaD = []
 HorariosD = ['10h', '12h',  '16h', '18h']
@@ -146,8 +153,8 @@ while True:
                         funçõescami.acharAtendimento(atendimentoP , atendimento)
 
                         if funçõescami.acharAtendimento(atendimentoP , atendimento) == True:
-                            for x in range(len(HorariosD)):
-                                print(f'horarios disponiveis {HorariosD[x]}')
+                            for h in range(len(HorariosD)):
+                                print(f'horarios: {HorariosD[h]['horario']}')
 
                             horario = input('digite o horario que deseja marcar: ')
 
@@ -158,28 +165,28 @@ while True:
                             if horario == '10h':
                                 if contador1 < 3:
                                     contador1 += 1
-                                    funçõescami.horario(atendimentoP, valort, atendimento)
+                                    funçõescami.paghorario(atendimentoP, valort, atendimento)
                                     
                                 else:
                                     print('esse horario esta cheio!')
                             elif horario == '12h':
                                 if contador2 < 3:
                                     contador2 += 1
-                                    funçõescami.horario(atendimentoP, valort, atendimento)
+                                    funçõescami.pagorario(atendimentoP, valort, atendimento)
                                     
                                 else:
                                     print('esse horario esta cheio!')
                             elif horario == '16h':
                                 if contador3 < 3:
                                     contador3 += 1
-                                    funçõescami.horario(atendimentoP, valort, atendimento)
+                                    funçõescami.paghorario(atendimentoP, valort, atendimento)
                                     
                                 else:
                                     print('esse horario esta cheio!')
                             elif horario == '18h':
                                 if contador4 < 3:
                                     contador4 += 1
-                                    funçõescami.horario(atendimentoP, valort, atendimento)
+                                    funçõescami.paghorario(atendimentoP, valort, atendimento)
                                     
                                 else:
                                     print('esse horario esta cheio!')
