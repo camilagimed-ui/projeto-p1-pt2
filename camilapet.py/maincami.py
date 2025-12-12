@@ -88,59 +88,8 @@ while True:
                         print('Realize sua compra agora mesmo!')
 
                         funçõescami.listaProdutos(produtos)
-
-                        while True:
-                            qtd = int(input('Digite a quantidade de produtos que deseja comprar: '))
-                            while qtd <= 0 or qtd > len(produtos):
-                                print('Quantidade inválida de produto! Digite novamente!')
-                                qtd = int(input('Digite a quantidade de produtos que deseja comprar: '))
-
-                            valorT = 0
-                            q = 0  
-                            while q < qtd:
-                                produtoC = input(f'Digite o nome do produto número {q + 1} que deseja comprar: ')
-                                achouP = 0
-
-                                for i in range(len(produtos)):
-                                    if produtoC.lower() == produtos[i]['nome'].lower():
-                                        print(f"Produto {produtos[i]['nome']} | Valor: ${produtos[i]['preco']} cada")
-                                        achouP = 1
-
-                                        if produtos[i]['estoque'] == 0:
-                                            print('Produto esgotado!')
-                                            break
-
-                                        qProduto = int(input('Digite a quantidade desse produto que deseja levar: '))
-
-                                        while qProduto <= 0:
-                                            print('Quantidade inválida. Digite novamente.')
-                                            qProduto = int(input('Digite a quantidade desse produto que deseja comprar: '))
-
-                                        if qProduto > produtos[i]['estoque']:
-                                            print(f"Estoque insuficiente! Só há {produtos[i]['estoque']} unidades disponíveis.")
-                                        else:
-                                            produtos[i]['estoque'] -= qProduto
-                                            valorT += produtos[i]['preco'] * qProduto
-                                            q += 1  
-                                            print(f"Você comprou {qProduto} {produtos[i]['nome']}")
-                                        break
-
-                                if achouP == 0:
-                                    print('Produto não encontrado! Digite novamente.')
-
-                            print(f'o valor total da compra foi de {valorT}')
-                            pagamento = float(input('Insira quanto de dinheiro você vai dar: '))
-                            while pagamento < 0 or pagamento < valorT:
-                                print('Valor inválido! Digite novamente!')
-                                pagamento = float(input('Insira quanto de dinheiro você vai dar: '))
-
-                            if pagamento > valorT:
-                                troco = pagamento - valorT
-                                print(f'Compra concluída com sucesso! Seu troco é: R${troco}')
-                                break
-                            else:
-                                print('Pagamento realizado com sucesso!Obrigada por realizar sua compra no Pet e Cia!')
-                                break
+                        
+                        funçõescami.compraraP(produtos)
 
                     elif opcao == 2:
                         print('escolha seu atendimento:')

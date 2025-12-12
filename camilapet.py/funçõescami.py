@@ -23,7 +23,7 @@ HorariosD = [
     {'horario' : '16h'},
     {'horario' : '18h'},
 ]
-
+produtoC = ""
 avaliacao = []
 valort = 0
 usuario = [] 
@@ -65,7 +65,8 @@ def acharAtendimento(atendimentoP , atendimento):
             
     else:
         print('atendimento não encontrado! ')
-     
+
+
 
 
 def paghorario(atendimentoP , valort , atendimento):
@@ -214,3 +215,52 @@ def desejo(produtos , listaD):
     else:
         print(f'o produto {item} não existe em nossa loja!')
 
+def pagamento(valorT):
+        print(f'O valor total da compra foi de {valorT}')
+        pagamento = float(input('Insira quanto de dinheiro você vai dar: '))
+        while pagamento < 0 or pagamento < valorT:
+            print('Valor inválido! Digite novamente!')
+            pagamento = float(input('Insira quanto de dinheiro você vai dar: '))
+
+        if pagamento > valorT:
+            troco = pagamento - valorT
+            print(f'Compra concluída com sucesso! Seu troco é: R${troco}')
+            
+        else:
+            print('Pagamento realizado com sucesso! Obrigada por realizar sua compra no Pet e Cia!')
+            
+def compraraP(produtos):
+    while True:
+        qtd = int(input('Digite a quantidade de produtos que deseja comprar: '))
+        while qtd <= 0 or qtd > len(produtos):
+            print('Quantidade inválida de produto! Digite novamente!')
+            qtd = int(input('Digite a quantidade de produtos que deseja comprar: '))
+        valorT = 0
+        q = 0  
+        while q < qtd:
+            achouP = 0
+            produtoC = input(f'Digite o nome do produto número {q + 1} que deseja comprar: ')
+            for i in range(len(produtos)):
+                if produtoC.lower() == produtos[i]['nome'].lower():
+                    achouP = 1
+                    print(f"Produto {produtos[i]['nome']} | Valor: ${produtos[i]['preco']} cada")
+                    if produtos[i]['estoque'] == 0:
+                        print('Produto esgotado!')
+                        break
+                    qProduto = int(input('Digite a quantidade desse produto que deseja levar: '))
+                    while qProduto <= 0:
+                        print('Quantidade inválida. Digite novamente.')
+                        qProduto = int(input('Digite a quantidade desse produto que deseja comprar: '))
+                    if qProduto > produtos[i]['estoque']:
+                        print(f"Estoque insuficiente! Só há {produtos[i]['estoque']} unidades disponíveis.")
+                    else:
+                        produtos[i]['estoque'] -= qProduto
+                        valorT += produtos[i]['preco'] * qProduto
+                        q += 1
+                        print(f"Você comprou {qProduto} {produtos[i]['nome']}")
+                    break
+            if achouP == 0:
+                print('Produto não encontrado! Digite novamente!')
+                
+        pagamento(valorT)
+        break
